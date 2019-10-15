@@ -1,0 +1,51 @@
+<div class="container" style="text-align:center">
+  <div class="row" style="text-align:center">
+    <div class="col-md-12" style="font-size:22px">Crypto-Currency List </div>
+    <br><br><br><br>
+  </div>
+  <!-- <div class="row" *ngIf="allData.length>0">
+      <div class="col-12">
+        <form class="form-row my-4">
+          <div class="col-md-4 l-2">
+            <label for="Price"><b>Price:</b></label>
+            <ion-range-slider #sliderElement type="double" max="1000" min=".00001" from_shadow="true" to_shadow="true"
+              grid="true" grid_num="4" prefix=" " postfix="" decorate_both="" (onFinish)="myOnFinish($event, 'price')"></ion-range-slider>
+          </div>
+         
+          <div class="col-md-4 l-4">
+            <label for="Cap"><b>Cap:</b></label>
+            <ion-range-slider #sliderElement type="double" max="3000000000" min="10000000" from_shadow="true" to_shadow="true"
+              grid="true" grid_num="3" prefix=" " postfix="" decorate_both="false" (onFinish)="myOnFinish($event, 'marketCap')"></ion-range-slider>
+          </div>
+        </form>
+      </div>
+    </div> -->
+
+  <div class="row" style="text-align:center" *ngIf="allData.length" >
+    <table class="table table-sm table-hover ">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Cryptocurrency</th>
+          <th scope="col" (click)="sort('quotes.USD.price')">Price</th>
+          <th scope="col" (click)="sort('quotes.USD.market_cap')">Marketcap</th>
+        </tr>
+      </thead>
+      <tbody *ngFor='let data of allData | orderBy: key : reverse | paginate: { itemsPerPage: 20, currentPage: p}; let i=index'>
+          
+
+        <tr>
+          <td>{{i+1}}</td>
+          <td>{{data.name }}</td>
+          <td>{{data.quote.USD.price}}</td>
+          <td>{{data.quote.USD.market_cap}}</td>
+
+        </tr>
+
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    
+  </div>
+
+</div>
